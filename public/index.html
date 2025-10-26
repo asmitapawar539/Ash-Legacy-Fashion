@@ -61,7 +61,7 @@
            <p>Today's Deals</p>
           <p>Customer</p>
            <p>Registry</p>
-           <p>Gift Cards</p>
+           <p id="giftcard">Gift Cards</p>
            <p id="sell">Sell's</p>
     </div></div>
 </header>
@@ -248,6 +248,10 @@ async function checkUser() {
 
 checkUser();
 
+    document.getElementById("giftcard").addEventListener("click", function() {
+  window.location.href = "card.html";
+});
+
 // Wishlist 
 const wishlistNav = document.getElementById("wishlistNav");
 const wishlistSection = document.getElementById("wishlistSection");
@@ -392,4 +396,5 @@ window.addEventListener("load", () => {
 });
 </script>
 </body>
+
 </html>
