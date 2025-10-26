@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ash Pay Section</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      margin: 0;
+      padding: 0;
+    }
+    .ash-pay-section {
+      background: #fff;
+      max-width: 360px;
+      margin: 30px auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .ash-pay-logo {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+    .ash-pay-title {
+      font-size: 1.5em;
+      color: #232f3e;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    .ash-pay-desc {
+      color: #4a4848;
+      font-size: 0.80em;
+      margin-bottom: 16px;
+    }
+    .payment-modes {
+      text-align: left;
+      font-size: 1em;
+      margin-bottom: 25px;
+    }
+    .payment-modes label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    .payment-details {
+      display: none;
+      margin: 10px 0 18px 0;
+      text-align: left;
+      font-size: 0.80em;
+    }
+    .payment-details input,
+    .payment-details select {
+      width: 70%;
+      padding: 8px;
+      margin: 4px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .ash-pay-btn {
+      background: #1a293b;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 7px 10px;
+      font-size: 0.90em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      width: 50%;
+    }
+    .ash-pay-btn:hover {
+      background: #2e4260;
+    }
+    .success-msg {
+      display: none;
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 17px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="ash-pay-section">
+    <img class="ash-pay-logo" src="images/ash_logo.png" alt="Ash Pay Logo">
+    <div class="ash-pay-title">Ash Pay</div>
+    <div class="ash-pay-desc">
+      Fast and secure payments with your account. Choose a payment mode below.
+    </div>
+
+    <div class="payment-modes">
+      <label><input type="radio" name="paymentMode" value="UPI"> UPI</label>
+      <label><input type="radio" name="paymentMode" value="Card"> Debit / Credit Card</label>
+      <label><input type="radio" name="paymentMode" value="NetBanking"> Net Banking</label>
+      <label><input type="radio" name="paymentMode" value="Wallet"> Ash Pay Wallet</label>
+      <label><input type="radio" name="paymentMode" value="COD"> Cash on Delivery</label>
+    </div>
+
+    <div id="upiDetails" class="payment-details">
+      <label>Enter UPI ID:</label>
+      <input type="text" placeholder="example@upi">
+    </div>
+
+<div id="cardDetails" class="payment-details">
+      <label>Card Number:</label>
+      <input type="text" maxlength="16" placeholder="1234 5678 9012 3456">
+      <label>Expiry Date:</label>
+      <input type="text" placeholder="MM/YY"><br>
+      <label>CVV:</label>
+      <input type="password" maxlength="3" placeholder="***">
+    </div>
+
+<div id="netbankingDetails" class="payment-details">
+      <label>Select Bank:</label>
+      <select>
+        <option value="">--Choose Bank--</option>
+        <option>SBI</option>
+        <option>HDFC</option>
+        <option>ICICI</option>
+        <option>Axis Bank</option>
+      </select>
+    </div>
+<button class="ash-pay-btn">Pay Now</button>
+    <div class="success-msg" id="successMsg"></div>
+  </div>
+
+<script>
+const modes = document.querySelectorAll('input[name="paymentMode"]');
+const details = {
+  UPI: document.getElementById('upiDetails'),
+  Card: document.getElementById('cardDetails'),
+  NetBanking: document.getElementById('netbankingDetails'),
+  Wallet: null,
+  COD: null
+};
+
+modes.forEach(mode => {
+  mode.addEventListener('change', () => {
+    for (let key in details) {
+      if (details[key]) details[key].style.display = 'none';
+    }
+    if (details[mode.value]) {
+      details[mode.value].style.display = 'block';
+    }
+  });
+});
+
+// Payment confirmation
+document.querySelector('.ash-pay-btn').addEventListener('click', function() {
+  const selectedMode = document.querySelector('input[name="paymentMode"]:checked');
+  const msg = document.getElementById('successMsg');
+
+  if (!selectedMode) {
+    msg.style.display = 'block';
+    msg.style.color = 'red';
+    msg.innerText = '⚠️ Please select a payment mode';
+    return;
+  }
+
+  msg.style.display = 'block';
+  msg.style.color = 'green';
+  msg.innerText = `✅ Payment successful via ${selectedMode.value}`;
+});
+</script>
+</body>
+</html>
