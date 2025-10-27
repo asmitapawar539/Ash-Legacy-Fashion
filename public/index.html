@@ -59,10 +59,10 @@
 <div class="panel">
           <div class="panelops">
            <p>Today's Deals</p>
-          <p>Customer</p>
+           <p>Customer</p>
            <p>Registry</p>
-           <p id="giftcard">Gift Cards</p>
-           <p id="sell">Sell's</p>
+            <p><a href="card.html" style="text-decoration:none; color:inherit;">Gift Cards</a></p>
+            <p><a href="offer.html" style="text-decoration:none; color:inherit;">Sell's</a></p>
     </div></div>
 </header>
 <div class="herosection">
@@ -221,11 +221,6 @@
 </footer>   
 <script>
 
-document.getElementById("sell").addEventListener("click", function () {
-  window.location.href = "offer.html";
-});
-
-
 async function checkUser() {
   const res = await fetch("/user", { credentials: "include" });
   const data = await res.json();
@@ -247,10 +242,6 @@ async function checkUser() {
 }
 
 checkUser();
-
-    document.getElementById("giftcard").addEventListener("click", function() {
-  window.location.href = "card.html";
-});
 
 // Wishlist 
 const wishlistNav = document.getElementById("wishlistNav");
@@ -386,7 +377,7 @@ document.querySelectorAll(".box").forEach(box => {
   seeMore.addEventListener("click", goToProduct);
 });
 
-// === Restore scroll position when returning from product page ===
+// Restore scroll position when returning from product page
 window.addEventListener("load", () => {
   const scrollY = localStorage.getItem("scrollPos");
   if (scrollY) {
@@ -396,5 +387,4 @@ window.addEventListener("load", () => {
 });
 </script>
 </body>
-
 </html>
