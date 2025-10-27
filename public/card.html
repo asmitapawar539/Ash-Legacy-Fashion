@@ -6,6 +6,11 @@
   <title>Ash Legacy Fashion</title>
   <link rel="stylesheet" href="ash.css">
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fefefe;
+    }
+
     .card-section {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
@@ -18,12 +23,13 @@
     .card {
       opacity: 0;
       transform: translateY(40px);
-      background: linear-gradient(145deg, #fefefe, #f2f2f2);
+      background: linear-gradient(145deg, #ffffff, #f2f2f2);
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       text-align: center;
       transition: transform 0.4s, box-shadow 0.4s, opacity 0.6s ease;
+      position: relative;
     }
 
     .card.visible {
@@ -41,6 +47,7 @@
       height: 220px;
       object-fit: cover;
       transition: transform 0.4s;
+      cursor: pointer;
     }
 
     .card:hover img {
@@ -87,12 +94,31 @@
     .card button:hover {
       background-color: #5a436c;
     }
+
+    /* Footer */
+    footer {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 25px;
+      margin-top: 50px;
+      font-size: 0.95em;
+    }
+
+    footer a {
+      color: #d794f4;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <!-- ===== Navbar ===== -->
+
+  <!-- Navbar  -->
   <header>
-    <!-- Use your existing navbar connected to ash.css -->
     <div class="navbar">
       <div class="nav-logo border"><div class="logo"></div></div>
       <div class="navaddress border">
@@ -108,7 +134,7 @@
             <option value="electronics">Electronics</option>
             <option value="Beauty Picks">Beauty Picks</option>
           </select>
-          <input id="se" placeholder="Search  Best  Product's on Ash Legacy Fashion">
+          <input id="se" placeholder="Search Best Product's on Ash Legacy Fashion">
         </div>
       </div>
       <div class="navsignin border" id="userProfile">
@@ -118,70 +144,113 @@
     </div>
   </header>
 
-  <!-- ===== Animated Card Section ===== -->
+  <!--  Card Section  -->
   <section class="card-section">
-    <div class="card">
+    <div class="card" data-id="prod1">
       <div class="category-label">Clothes</div>
       <img src="images/c1.jpg" alt="Elegant Dress">
       <h3>Elegant Dress</h3>
       <p>Perfect for every occasion.</p>
-      <button class="wishlist-btn" data-id="prod101" data-name="Elegant Dress" data-image="images/dress1.jpg" data-price="999">❤️ Wishlist</button>
+      <button class="wishlist-btn" data-id="prod1" data-name="Elegant Dress" data-image="images/c1.jpg" data-price="999">❤️ Wishlist</button>
     </div>
-    <div class="card">
+
+    <div class="card" data-id="prod2">
       <div class="category-label">Home</div>
       <img src="images/c2.jpg" alt="Decorative Basket">
       <h3>Decorative Basket</h3>
       <p>Handcrafted and stylish.</p>
-      <button class="wishlist-btn" data-id="prod102" data-name="Decorative Basket" data-image="images/basket1.jpg" data-price="599">❤️ Wishlist</button>
+      <button class="wishlist-btn" data-id="prod2" data-name="Decorative Basket" data-image="images/c2.jpg" data-price="599">❤️ Wishlist</button>
     </div>
-    <div class="card">
+
+    <div class="card" data-id="prod3">
       <div class="category-label">Decor</div>
       <img src="images/c3.jpg" alt="Artistic Frame">
       <h3>Artistic Frame</h3>
       <p>Add elegance to your home.</p>
-      <button class="wishlist-btn" data-id="prod103" data-name="Artistic Frame" data-image="images/frame1.jpg" data-price="399">❤️ Wishlist</button>
+      <button class="wishlist-btn" data-id="prod3" data-name="Artistic Frame" data-image="images/c3.jpg" data-price="399">❤️ Wishlist</button>
     </div>
-    <div class="card">
+
+    <div class="card" data-id="prod4">
       <div class="category-label">Jewelry</div>
       <img src="images/c4.jpg" alt="Fancy Jewelry">
       <h3>Fancy Jewelry</h3>
       <p>Shine bright with our collection.</p>
-      <button class="wishlist-btn" data-id="prod104" data-name="Fancy Jewelry" data-image="images/jewelry1.jpg" data-price="1299">❤️ Wishlist</button>
+      <button class="wishlist-btn" data-id="prod4" data-name="Fancy Jewelry" data-image="images/c4.jpg" data-price="1299">❤️ Wishlist</button>
     </div>
   </section>
 
+  <!--Footer-->
+  <footer>
+    <p>&copy; 2025 <b>Ash Legacy Fashion</b>. All Rights Reserved.</p>
+    <p>Follow us on 
+      <a href="#">Instagram</a> | 
+      <a href="#">Facebook</a> | 
+      <a href="#">Twitter</a>
+    </p>
+  </footer>
+
   <script>
-    // ===== Animate Cards One by One =====
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
-      setTimeout(() => {
-        card.classList.add('visible');
-      }, index * 500); // delay each card by 0.4 seconds
+
+  async function checkUser() {
+  const res = await fetch("/user", { credentials: "include" });
+  const data = await res.json();
+
+  const customerBtn = document.getElementById("customer");
+
+  if (data.loggedIn) {
+    customerBtn.innerHTML = `Hello, ${data.user.name}<br><b>Sign Out</b>`;
+    customerBtn.onclick = async () => {
+      await fetch("/logout", { method: "POST", credentials: "include" });
+      window.location.reload();
+    };
+  } else {
+    customerBtn.innerHTML = `Sign In<br><b>Accounts & Lists</b>`;
+    customerBtn.onclick = () => {
+      window.location.href = "form.html";
+    };
+  }
+}
+
+checkUser();   
+
+    // Cards
+    document.querySelectorAll('.card').forEach((card, index) => {
+      setTimeout(() => card.classList.add('visible'), index * 300);
     });
 
-    // ===== Wishlist Handling =====
-  
+    // Wishlist button click
     document.querySelectorAll(".wishlist-btn").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const productId = btn.dataset.id;
-        const name = btn.dataset.name;
-        const image = btn.dataset.image;
-        const price = parseFloat(btn.dataset.price);
+      btn.addEventListener("click", async (e) => {
+        e.stopPropagation(); // stop redirect when clicking button
+        const { id, name, image, price } = btn.dataset;
         try {
           const res = await fetch("/wishlist/add", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
-            body: JSON.stringify({ productId, name, image, price })
+            body: JSON.stringify({ productId: id, name, image, price: parseFloat(price) })
           });
           const result = await res.json();
           alert(result.success ? `✅ ${name} added to wishlist!` : result.message);
-        } catch(err) {
+        } catch {
           alert("❌ Network error");
         }
       });
     });
-     
+
+    // Click image 
+    document.querySelectorAll('.card img').forEach(img => {
+      img.addEventListener("click", (e) => {
+        const card = e.target.closest('.card');
+        const productId = card.dataset.id;
+        window.location.href = `product.html?id=${productId}`;
+      });
+    });
+
+    // Wishlist navigation
+    document.getElementById("wishlistNav").addEventListener("click", () => {
+      window.location.href = "wishlist.html";
+    });
   </script>
 </body>
 </html>
