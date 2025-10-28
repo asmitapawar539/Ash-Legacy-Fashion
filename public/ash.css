@@ -191,17 +191,19 @@ outline: none;
   justify-content: center;
 }
 .heromsg h3 {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   max-width: 500px;
-  font-size: 20px;
-  color: #4c57d3ed;
+  font-size: 16px;
+  color: #251d3bed;
   margin-top: 3cm;
 }
 
 .heromsg a {
-  color: #4c4d26;
+  color: #000000;
   cursor: pointer;
+  font-size:12px;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 450;
 }
 
 .heromsg a:hover {
@@ -434,13 +436,7 @@ margin-top: 5px;
   transform: translateY(-1px);  
 }
 .wishlist-btn:active {
-  background: #c79c2f;         
+  background: #3d2943;         
   transform: translateY(0);
 }
-
-
-
-
-
-
 
