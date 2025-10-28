@@ -1,4 +1,5 @@
 // product.js
+
 // Product data
 const products = {
   prod1: {
@@ -61,7 +62,7 @@ const products = {
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
 
-// Get product 
+// Get product elements
 const img = document.getElementById("product-image");
 const nameEl = document.getElementById("product-name");
 const priceEl = document.getElementById("product-price");
@@ -102,9 +103,26 @@ wishlistBtn.addEventListener("click", async () => {
   }
 });
 
-// Buy now → redirect 
-buyBtn.addEventListener("click", () => {
-  window.location.href = "payment.html";
+
+// ✅ Buy Now button — check login before redirect
+buyBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch("/user", { credentials: "include" });
+    const data = await res.json();
+
+    if (data.loggedIn) {
+      // User is logged in → go to payment
+      window.location.href = `payment.html?id=${productId}`;
+    } else {
+      // User not logged in → show message / redirect
+      alert("⚠️ Please log in to continue with your order.");
+      window.location.href = "form.html"; // login page
+    }
+  } catch (err) {
+    console.error("Error checking user login:", err);
+    alert("❌ Network error. Please try again later.");
+  }
 });
 
 // Wishlist navigation
@@ -112,23 +130,27 @@ document.getElementById("wishlistNav").addEventListener("click", () => {
   window.location.href = "wishlist.html";
 });
 
-// user check 
+// User login status in header
 async function checkUser() {
-  const res = await fetch("/user", { credentials: "include" });
-  const data = await res.json();
-  const customerBtn = document.getElementById("customer");
+  try {
+    const res = await fetch("/user", { credentials: "include" });
+    const data = await res.json();
+    const customerBtn = document.getElementById("customer");
 
-  if (data.loggedIn) {
-    customerBtn.innerHTML = `Hello, ${data.user.name}<br><b>Sign Out</b>`;
-    customerBtn.onclick = async () => {
-      await fetch("/logout", { method: "POST", credentials: "include" });
-      window.location.reload();
-    };
-  } else {
-    customerBtn.innerHTML = `Sign In<br><b>Accounts & Lists</b>`;
-    customerBtn.onclick = () => {
-      window.location.href = "form.html";
-    };
+    if (data.loggedIn) {
+      customerBtn.innerHTML = `Hello, ${data.user.name}<br><b>Sign Out</b>`;
+      customerBtn.onclick = async () => {
+        await fetch("/logout", { method: "POST", credentials: "include" });
+        window.location.reload();
+      };
+    } else {
+      customerBtn.innerHTML = `Sign In<br><b>Accounts & Lists</b>`;
+      customerBtn.onclick = () => {
+        window.location.href = "form.html";
+      };
+    }
+  } catch (err) {
+    console.error("User check failed:", err);
   }
 }
 checkUser();
