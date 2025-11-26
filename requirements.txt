@@ -12,5 +12,6 @@ httpx==0.28.1
 typing-extensions==4.15.0
 fastapi-cli==0.0.16
 ujson==5.7.0
-orjson==3.9.0
 annotated-types==0.7.0
+
+
