@@ -1,6 +1,8 @@
-fastapi
-uvicorn
-passlib[bcrypt]
-motor
-pydantic
-python-multipart
+fastapi==0.111.0
+uvicorn==0.22.0
+passlib[bcrypt]==1.7.4
+motor==3.1.1
+pydantic==2.5.1
+python-multipart>=0.0.7
+jinja2==3.1.2
+itsdangerous
