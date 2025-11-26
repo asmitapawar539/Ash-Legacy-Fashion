@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ash Legacy Fashion Sign-Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      background: #fff;
+      font-family: 'Amazon Ember', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .form-container {
+      width: 400px;
+      margin: 20px auto;
+      padding: 25px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .ash-logo {
+      display: block;
+      margin: 0px auto;
+      width: 130px;
+    }
+    h2 { font-size: 16px; margin-bottom: 10px; color: #111; }
+    label { display: block; font-size: 12px; margin-bottom: 4px; color: #111; }
+    input {
+      width: 95%;
+      padding: 6px;
+      margin-bottom: 15px;
+      border: 1px solid #a6a6a6;
+      border-radius: 3px;
+      font-size: 15px;
+    }
+    .continue-btn {
+      width: 98%;
+      background: #15233a;
+      border: 1px solid #000000;
+      border-radius: 3px;
+      padding: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fffefe;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .continue-btn:hover { background: #41345f; }
+    .msg { font-size: 13px; margin: 10px 0; text-align: center; display: none; }
+  </style>
+</head> 
+<body>
+  <img class="ash-logo" src="images/ash_logo.png" alt="Ash Logo" />
+
+  <!-- Register Form-->
+  <div class="form-container">
+    <form class="register-form" method="post" action="/submit">
+      <h2>Create account</h2>
+      <label for="name">Your name</label>
+      <input type="text" id="name" name="name" required />
+      <label for="email">Mobile number or email</label>
+      <input type="email" id="email" name="email" required />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" minlength="6" required />
+      <label for="confirm">Re-enter password</label>
+      <input type="password" id="confirm" name="confirm" minlength="6" required />
+      <button type="submit" class="continue-btn">Continue</button>
+    </form>
+    <div id="successMsg" class="msg"></div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="form-container">
+    <form class="login-form">
+      <h2>Sign In</h2>
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" name="email" required />
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" name="password" required />
+      <button type="submit" class="continue-btn">Sign In</button>
+    </form>
+    <div id="loginMsg" class="msg"></div>
+  </div>
+
+<script>
+  // Registration Form
+  const registerForm = document.querySelector(".register-form");
+  const successMsg = document.getElementById("successMsg");
+
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(registerForm);
+
+    const res = await fetch("/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await res.json();
+    successMsg.style.display = "block";
+    successMsg.style.color = res.ok && result.success ? "green" : "red";
+    successMsg.innerText = result.message;
+    if (result.success) registerForm.reset();
+  });
+
+  // Login Form
+  const loginForm = document.querySelector(".login-form");
+  const loginMsg = document.getElementById("loginMsg");
+
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(loginForm);
+
+    const res = await fetch("/signin", {
+      method: "POST",
+      body: formData,
+      credentials: "include",
+    });
+
+    const result = await res.json();
+    loginMsg.style.display = "block";
+    loginMsg.style.color = res.ok && result.success ? "green" : "red";
+    loginMsg.innerText = result.message;
+
+    if (result.success) {
+      setTimeout(() => (window.location.href = "index.html"), 100);
+    }
+  });
+</script>
+</body>
+</html>

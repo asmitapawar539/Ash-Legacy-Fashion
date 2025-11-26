@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ash Legacy Fashion</title>
+    <link rel="stylesheet" href="/public/ash.css">
+    
+</head>
+<body>
+  <header>
+ <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+  <symbol id="icon-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
+    <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" fill="none"/>
+  </symbol>
+  <symbol id="icon-cart" viewBox="0 0 24 24">
+    <circle cx="9" cy="21" r="1.5" fill="currentColor"/>
+    <circle cx="18" cy="21" r="1.5" fill="currentColor"/>
+    <path d="M2 2h3l3.6 7.59L8 14a2 2 0 002 2h9a2 2 0 001.92-1.45l3-10A1 1 0 0022 3H6" 
+      stroke="currentColor" stroke-width="2" fill="none"/>
+  </symbol>
+</svg>
+<div class="navbar"><div class="nav-logo border">
+    <div class="logo"></div>
+  </div>
+    <div class="navaddress border">
+      <svg class="icon" width="25" height="10" viewBox="0 0 22 22">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+    <circle cx="12" cy="9" r="2.5"/></svg>
+         <p id="para">Deliver to<br><b>India</b></p>
+  </div>
+    <div class="navsearch border">
+             <div class="search">
+<select id="filter">
+  <option value="all">All</option>
+  <option value="clothes">Clothes</option>
+  <option value="Jwellary">Jwellary</option>
+  <option value="furniture">Furniture</option>
+  <option value="electronics">Electronics</option>
+  <option value="Beauty Picks">Beauty Picks</option>
+</select>
+          <input  id="se" placeholder="Search  Best  Product's on Ash Lagecy Fashion">
+        </div> 
+    </div>
+    <div class="navsignin border" id="userProfile">
+      <svg class="icon" width="12" height="13">
+      <use href="#icon-user"></use>
+    </svg> 
+   <p>
+     <span  id="customer">Sign In<br><b>Accounts & Lists</b></span>
+   </p>
+</div>
+  
+<h4 id="wishlistNav" class="border" style="cursor:pointer;">
+   <svg class="icon" width="18" height="15"><use href="#icon-cart"></use></svg> 
+   Wishlist </h4></div>
+
+<div class="panel">
+          <div class="panelops">
+           <p><a href="/public/offer.html" style="text-decoration:none; color:inherit;">Today's Deals</a></p>
+           <p><a href="/public/customer.html" style="text-decoration:none; color:inherit;">Customer</a></p>
+           <p><a href="/public/form.html" style="text-decoration:none; color:inherit;">Registry</a></p>
+            <p><a href="/public/card.html" style="text-decoration:none; color:inherit;">Gift Cards</a></p>
+            <p><a href="/public/offer.html" style="text-decoration:none; color:inherit;">Sell's</a></p>
+    </div></div>
+</header>
+<div class="herosection">
+    <div class="heromsg" style="width: 100%; max-width: 500px;">
+        <h3>You are on <i>Ash Legacy Fashion</i>,<br>You can shop millions of products <br> with fast local delivery. <br> <a href="form.html">Click here to go to Ashlegacyfashion.com</a></h3>
+    </div>
+</div>
+<div class="shopsection">
+    <div class="box1 box">
+        <div class="boxcontent">
+
+        <h2>Clothes</h2>
+        <div class="boximg" style="background-image: url('/public/images/box1_image.jpg');"></div>
+       <button class="wishlist-btn" data-id="prod1" data-name="Clothes" data-image="images/box1_image.jpg" data-price="999">
+      ❤️ Wishlist</button><p>See more</p>
+    <a style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" href="#" class="order-btn" data-id="prod1">Order now</a></div>
+    </div>
+
+    <div class="box2 box"> <div class="boxcontent">
+        <h2>Health Care</h2>
+    <div class="boximg" style="background-image: url('/public/images/box2_image.jpg');"></div>
+    <button class="wishlist-btn" data-id="prod2" data-name="Health Care" data-image="images/box2_image.jpg" data-price="999">❤️ Wishlist</button>
+    <p>See more</p>
+     <a style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" href="#" class="order-btn" data-id="prod2">Order now</a>
+    </div></div>
+
+    <div class="box3 box"> <div class="boxcontent">
+        <h2>Furniture</h2>
+    <div class="boximg" style="background-image: url('/public/images/box3_image.jpg');"></div>
+    <button class="wishlist-btn" data-id="prod3" data-name="Furniture" data-image="images/box3_image.jpg" data-price="999">
+      ❤️ Wishlist
+    </button><p>See more</p>
+     <a style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" href="#" class="order-btn" data-id="prod3">Order now</a>
+    </div></div>
+
+    <div class="box4 box"> <div class="boxcontent">
+        <h2>Electronics</h2>
+    <div class="boximg" style="background-image: url('/public/images/box4_image.jpg');"></div>
+   <button class="wishlist-btn" data-id="prod4" data-name="Electronics" data-image="images/box4_image.jpg" data-price="999">
+      ❤️ Wishlist
+    </button><p>See more</p>
+     <a style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" href="#" class="order-btn" data-id="prod4">Order now</a>
+    </div></div>
+
+    <div class="box1 box">
+        <div class="boxcontent">
+          <h2>Beauty Picks</h2>
+        <div class="boximg" style="background-image: url('/public/images/box5_image.jpg');"></div>
+        <button class="wishlist-btn" data-id="prod5" data-name="Beauty Picks" data-image="images/box5_image.jpg" data-price="999">
+      ❤️ Wishlist
+    </button><p>See more</p>
+         <a style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" href="#"class="order-btn" data-id="prod5">Order now</a>
+        </div>
+    </div>
+    <div class="box2 box"> <div class="boxcontent">
+        <h2>Pet Care</h2>
+    <div class="boximg" style="background-image: url('/public/images/box6_image.jpg');"></div>
+   <button class="wishlist-btn" data-id="prod6" data-name="Pet Care" data-image="images/box6_image.jpg" data-price="999">
+      ❤️ Wishlist
+    </button> 
+
+    <p>See more</p>
+     <a style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" href="#"class="order-btn" data-id="prod6">Order now</a>
+    </div></div>
+    <div class="box3 box"> <div class="boxcontent">
+        <h2>New Arrivals Toys</h2>
+    <div class="boximg" style="background-image: url('/public/images/box7_image.jpg');"></div>
+    <button class="wishlist-btn" data-id="prod7" data-name="New Arrivals Toys" data-image="images/box7_image.jpg" data-price="999">
+      ❤️ Wishlist
+    </button>
+
+    <p>See more</p>
+     <a style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" href="#"class="order-btn" data-id="prod7">Order now</a>
+    </div></div>
+    <div class="box4 box"> <div class="boxcontent">
+        <h2>Fashion Trends</h2>
+    <div class="boximg" style="background-image: url('/public/images/box8_image.jpg');"></div>
+    <button class="wishlist-btn" data-id="prod8" data-name="Fashion Trends" data-image="images/box8_image.jpg" data-price="999">
+      ❤️ Wishlist
+    </button>
+
+    <p>See more</p>
+     <a style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" href="#"class="order-btn" data-id="prod8">Order now</a>
+    </div></div>
+   <div class="box4 box"> <div class="boxcontent">
+        <h2>Jwellary Trends</h2>
+    <div class="boximg" style="background-image: url('/public/images/box9_image.jpg');"></div>
+   <button class="wishlist-btn"  data-id="prod9" data-name="Jwellary Trends" data-image="images/box9_image.jpg" data-price="999">
+      ❤️ Wishlist</button>
+
+    <p>See more</p>
+     <a href="#" style="font-size:10px; text-decoration: none; color: rgb(255, 175, 16);" class="order-btn" data-id="prod9">Order now</a>
+
+    </div></div>
+</div>
+
+<footer>
+    <div class="footpanel1">Back to Top</div>
+    <div class="footpanel2">
+        <ul>
+            <p>Your Account</p>
+            <a>Your Orders</a>
+            <a>Your Recently viewed Items</a>
+            <a href="/public/wishlist.html">Your Lists</a>
+            <a>Product Safty Alerts</a>
+            <a>Returns</a>
+            <a href="/public/offer.html">Ash Sells</a>
+        </ul>
+        <ul>
+            <p>About Ash Legacy</p>
+            <a>App Download</a>
+            <a>Free Delivery On First Order</a>
+            <a>About Fashion</a>
+            <a>Tnvestor Relations</a>
+            <a> Devices</a>
+            <a> Science</a>
+        </ul>
+        <ul>
+            <p>Ash Deals</p>
+            <a>Careers</a>
+            <a>Blog</a>
+            <a>Cards</a>
+            <a>Investor Relations</a>
+            <a>Shops</a>
+            <a>Internship Blog</a>
+        </ul>
+        <ul>
+            <p>Get to Know Us</p>
+            <a>Careers</a>
+            <a>Tnvestor Relations</a>
+            <a>About Alf.com</a>
+            <a>Service Relations</a>
+            <a>Devices</a>
+            <a>ASH LEGACY</a>
+        </ul>
+    </div>
+    <div class="footpanel3">
+        <div class="logo"></div>
+    </div>
+    <div class="footpanel4">
+        <div class="pages">
+            <a>Conditions of Use</a>
+            <a>Privacy Notice</a>
+            <a>Your Ads Privacy Choices</a>
+        </div>
+        <div class="copywright">1996-2025,ashlegacyfashion.com,Inc. or its affiliates</div>
+    </div>
+</footer>   
+<script>
+
+async function checkUser() {
+  const res = await fetch("/user", { credentials: "include" });
+  const data = await res.json();
+
+  const customerBtn = document.getElementById("customer");
+
+  if (data.loggedIn) {
+    customerBtn.innerHTML = `Hello, ${data.user.name}<br><b>Sign Out</b>`;
+    customerBtn.onclick = async () => {
+      await fetch("/logout", { method: "POST", credentials: "include" });
+      window.location.reload();
+    };
+  } else {
+    customerBtn.innerHTML = `Sign In<br><b>Accounts & Lists</b>`;
+    customerBtn.onclick = () => {
+      window.location.href = "/public/form.html";
+    };
+  }
+}
+
+checkUser();
+
+// Wishlist 
+const wishlistNav = document.getElementById("wishlistNav");
+const wishlistSection = document.getElementById("wishlistSection");
+
+async function loadWishlist() {
+  try {
+    const res = await fetch("wishlist", { credentials: "include" });
+    const data = await res.json();
+    const grid = document.getElementById("wishlistGrid");
+
+    if (!data.success) {
+      grid.innerHTML = `<p>${data.message}</p>`;
+      return;
+    }
+
+    grid.innerHTML = data.wishlist.map(item => `
+      <div class="wishlist-card">
+        <div class="wishlist-image" style="background-image:url('${item.image}')"></div>
+        <h2>${item.name}</h2>
+        <span class="price">₹${item.price}</span>
+        <button class="remove-btn" data-id="${item.productId}">Remove</button>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const productId = btn.dataset.id;
+        await fetch('/wishlist/remove', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: "include",
+          body: JSON.stringify({ productId })
+        });
+        loadWishlist();
+      });
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+wishlistNav.addEventListener("click", () => {
+  window.location.href = "/public/wishlist.html";
+});
+
+// Add to wishlist
+document.querySelectorAll(".wishlist-btn").forEach(btn => {
+  btn.addEventListener("click", async () => {
+
+    const formData = new FormData();
+    formData.append("productId", btn.dataset.id);
+    formData.append("name", btn.dataset.name);
+    formData.append("image", btn.dataset.image);
+    formData.append("price", btn.dataset.price);
+
+    try {
+      const res = await fetch("/wishlist/add", {
+        method: "POST",
+        credentials: "include",
+        body: formData
+      });
+
+      // If user is NOT logged in
+      if (res.status === 401) {
+        alert("⚠️ Login required!");
+        window.location.href = "/public/form.html";  // redirect to login page
+        return;
+      }
+
+      const result = await res.json();
+      if (!result.success) {
+        alert(result.message || "❌ Something went wrong");
+        return;
+      }
+
+      alert(`✅ ${btn.dataset.name} added to wishlist!`);
+
+    } catch (err) {
+      alert("❌ Network error");
+    }
+  });
+});
+
+// Product Search
+const searchInput = document.getElementById("se");
+const productBoxes = document.querySelectorAll(".box");
+
+searchInput.addEventListener("input", function () {
+  const query = searchInput.value.toLowerCase().trim();
+
+  productBoxes.forEach(box => {
+    const productName = box.querySelector("h2").innerText.toLowerCase();
+
+    // Match product name with search
+    if (productName.includes(query)) {
+      box.style.display = "block";
+    } else {
+      box.style.display = "none";
+    }
+  });
+});
+
+const filterSelect = document.getElementById("filter");
+const heroSection = document.querySelector(".herosection");
+
+filterSelect.addEventListener("change", function () {
+  const category = filterSelect.value.toLowerCase();
+
+  productBoxes.forEach(box => {
+    const productName = box.querySelector("h2").innerText.toLowerCase();
+
+    if (category === "all") {
+      //  Show hero section
+      heroSection.style.display = "";
+      // Show all products full width
+      box.style.display = "";
+      box.style.width = "";
+    } else if (productName.includes(category)) {
+      // Hide hero section
+      heroSection.style.display = "none";
+
+      // Matching category → 40% width
+      box.style.display = "block";
+      box.style.width = "40%";
+    } else {
+      // Hide non-matching products
+      box.style.display = "none";
+    }
+  });
+});
+
+//  "Order Now" buttons
+document.querySelectorAll(".order-btn").forEach(btn => {
+  btn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const productId = btn.dataset.id;
+
+    console.log("🛒 Order clicked for:", productId);
+
+    try {
+      const res = await fetch("/user", {
+        method: "GET",
+        credentials: "include", // important: keep session cookie
+        headers: { "Content-Type": "application/json" }
+      });
+
+      console.log("🔹 Fetch status:", res.status);
+      const data = await res.json();
+      console.log("🔹 Response data:", data);
+
+      if (data.loggedIn) {
+        console.log("✅ User logged in — redirecting to payment...");
+        window.location.href = `/public/payment.html?id=${productId}`;
+      } else {
+        console.log("⚠️ Not logged in — redirecting to login...");
+        alert("⚠️ Please log in to continue with your order.");
+        window.location.href = "/public/form.html";
+      }
+    } catch (err) {
+      console.error("❌ Fetch error:", err);
+      alert("❌ Network error. Please try again later.");
+    }
+  });
+});
+
+// Save scroll position before redirecting to product page
+document.querySelectorAll(".box").forEach(box => {
+  const productId = box.querySelector(".wishlist-btn").dataset.id;
+  const title = box.querySelector("h2");
+  const imageDiv = box.querySelector(".boximg");
+  const seeMore = box.querySelector("p");
+
+  const goToProduct = () => {
+    // Save scroll position before redirect
+    localStorage.setItem("scrollPos", window.scrollY);
+    window.location.href = `/public/product.html?id=${productId}`;
+  };
+
+  // Click handlers for title, image, and "See more"
+  title.addEventListener("click", goToProduct);
+  imageDiv.addEventListener("click", goToProduct);
+  seeMore.addEventListener("click", goToProduct);
+});
+
+// Restore scroll position when returning from product page
+window.addEventListener("load", () => {
+  const scrollY = localStorage.getItem("scrollPos");
+  if (scrollY) {
+    window.scrollTo(0, parseFloat(scrollY));
+    localStorage.removeItem("scrollPos");
+  }
+});
+
+
+</script>
+</body>
+</html>

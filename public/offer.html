@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ash - Offers</title>
+<link rel="stylesheet" href="ash.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        margin: 0;
+        padding:0 10px 30px 30px;
+    }
+
+    h2{
+        text-align: center;
+        color: #1f2b39;
+        margin-bottom: 4px;
+    }
+
+    .search-filter {
+        max-width: 900px;
+        margin: 10px auto 10px auto;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    .search-filter input,
+    .search-filter select {
+        padding: 8px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 0.5px solid #a6a6a6;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .card img {
+        width: 90%;
+        height: 250px;
+        object-fit:contain;
+    }
+
+    .card-content {
+        padding: 8px 10px;
+    }
+    .card-content p {
+        margin: 0 0 10px 0;
+        font-size: 0.80em;
+        color: #3e3e3e;
+    }
+
+    .offer {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: #ffd814;
+        color: #111;
+        padding: 5px 5px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 0.5em;
+        transition: transform 0.3s;
+    }
+
+    .card:hover .offer {
+        transform: rotate(-5deg);
+    }
+
+    button {
+        background: #232f3e;
+        color: #fff;
+        border: none;
+        padding: 10px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+        margin: 3px;
+    }
+
+    button:hover {
+        background: #373430;
+    }
+
+    .herosection {
+        text-align: center;
+        margin: 20px auto;
+        padding: 10px;
+        background: #e3f2fd;
+        border-radius: 10px;
+        font-size: 0.80em;
+        color: #1f2b39;
+        max-width: 900px;
+        height:1cm;
+    }
+</style>
+</head>
+<body>
+
+<h2>Deals & Offers</h2>
+
+<!--Search, Filter -->
+<div class="search-filter">
+  <input type="text" id="se" placeholder="Search products...">
+  <select id="filter">
+    <option value="all">All</option>
+    <option value="saree">Sarees</option>
+    <option value="kurta">Kurtas</option>
+    <option value="guitar">Guitars</option>
+    <option value="camera">Cameras</option>
+    <option value="painting">Paintings</option>
+    <option value="book">Books</option>
+  </select>
+</div>
+
+<!-- Hero Section -->
+<div class="herosection">
+  🎉 Welcome to Ash Legacy Fashion special deals!</div>
+<div class="grid-container">
+    <div class="card box">
+        <img src="images/offer/offer1.jpg" alt="Product 1">
+        <div class="offer">20% OFF</div>
+        <div class="card-content">
+            <p>Women's Banarasi Saree Pure Kanjivaram Silk Saree Soft 2025 Design With Blouse Piece.</p>
+            <button class="wishlist-btn" data-id="offer1" data-name="Banarasi Saree" data-image="images/offer/offer1.jpg" data-price="1299">❤️ Wishlist</button>
+        </div>
+    </div>
+
+    <div class="card box">
+        <img src="images/offer/offer2.jpg" alt="Product 2">
+        <div class="offer">15% OFF</div>
+        <div class="card-content">
+            <p>Ethluxis ® <br>Men's Silk Blend Kurta with Jacket Set.</p>
+            <button class="wishlist-btn" data-id="offer2" data-name="Kurta with Jacket" data-image="images/offer/offer2.jpg" data-price="1599">❤️ Wishlist</button>
+        </div>
+    </div>
+
+    <div class="card box">
+        <img src="images/offer/offer4.jpg" alt="Product 4">
+        <div class="offer">25% OFF</div>
+        <div class="card-content">
+            <p>Kadence Acoustica Series Acoustic Guitar – 40'' Grand Auditorium Ashwood Body.</p>
+            <button class="wishlist-btn" data-id="offer4" data-name="Kadence Guitar" data-image="images/offer/offer4.jpg" data-price="8999">❤️ Wishlist</button>
+        </div>
+    </div>
+
+    <div class="card box">
+        <img src="images/offer/offer3.jpg" alt="Product 6">
+        <div class="offer">40% OFF</div>
+        <div class="card-content">
+            <p>TECHNOVIEW Spy 1080P Full Hd Pen Camera Hidden 100 Minutes Pen Battery Life.</p>
+            <button class="wishlist-btn" data-id="offer3" data-name="Spy Pen Camera" data-image="images/offer/offer3.jpg" data-price="2499">❤️ Wishlist</button>
+        </div>
+    </div>
+
+    <div class="card box">
+        <img src="images/offer/offer6.jpg" alt="Product 5">
+        <div class="offer">30% OFF</div>
+        <div class="card-content">
+            <p>SAF Deer Paintings for Wall Decoration - Set Of 3, 3d modern art Painting for Living Room.</p>
+            <button class="wishlist-btn" data-id="offer6" data-name="Deer Paintings" data-image="images/offer/offer6.jpg" data-price="1199">❤️ Wishlist</button>
+        </div>
+    </div>
+
+    <div class="card box">
+        <img src="images/offer/offer5.jpg" alt="Product 5">
+        <div class="offer">30% OFF</div>
+        <div class="card-content">
+            <p>You Only Live Once: A Journey of Self-Discovery and Empowerment | Personal Growth.</p>
+            <button class="wishlist-btn" data-id="offer5" data-name="Self-Discovery Book" data-image="images/offer/offer5.jpg" data-price="499">❤️ Wishlist</button>
+        </div>
+    </div>
+</div>
+<footer style="text-align:center; margin-top:50px;">
+  © 2025 Ash Legacy Fashion
+</footer>
+
+<script>
+  // Wishlist
+ document.querySelectorAll(".wishlist-btn").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const productId = btn.dataset.id;
+    const name = btn.dataset.name;
+    const image = btn.dataset.image;
+    const price = btn.dataset.price;
+
+    const formData = new FormData();
+    formData.append("productId", productId);
+    formData.append("name", name);
+    formData.append("image", image);
+    formData.append("price", price);
+
+    try {
+      const res = await fetch("/wishlist/add", {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      });
+
+      const result = await res.json();
+      alert(result.success ? `✅ ${name} added!` : result.message);
+    } catch (err) {
+      alert("❌ Network error");
+    }
+  });
+});
+
+  //  Cart
+  document.querySelectorAll(".cart-btn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const productId = btn.dataset.id;
+      const name = btn.dataset.name;
+      const image = btn.dataset.image;
+      const price = parseFloat(btn.dataset.price);
+
+      try {
+        const res = await fetch("/cart/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ productId, name, image, price })
+        });
+        const result = await res.json();
+        alert(result.success ? `✅ ${name} added to Cart!` : result.message);
+      } catch (err) {
+        alert("❌ Network error");
+      }
+    });
+  });
+
+  // Search
+  const searchInput = document.getElementById("se");
+  const productBoxes = document.querySelectorAll(".box");
+
+  searchInput.addEventListener("input", function () {
+    const query = searchInput.value.toLowerCase().trim();
+
+    productBoxes.forEach(box => {
+      const productName = box.querySelector("p").innerText.toLowerCase();
+
+      if (productName.includes(query)) {
+        box.style.display = "block";
+      } else {
+        box.style.display = "none";
+      }
+    });
+  });
+
+  //  Filter
+  const filterSelect = document.getElementById("filter");
+  const heroSection = document.querySelector(".herosection");
+
+  filterSelect.addEventListener("change", function () {
+    const category = filterSelect.value.toLowerCase();
+
+    productBoxes.forEach(box => {
+      const productName = box.querySelector("p").innerText.toLowerCase();
+
+      if (category === "all") {
+        heroSection.style.display = "";
+        box.style.display = "";
+        box.style.width = "";
+      } else if (productName.includes(category)) {
+        heroSection.style.display = "none";
+        box.style.display = "block";
+        box.style.width = "40%";
+      } else {
+        box.style.display = "none";
+      }
+    });
+  });
+
+  /*  Wishlist Function  */
+async function addToWishlist(id, name, image, price) {
+  const formData = new FormData();
+  formData.append("productId", id);
+  formData.append("name", name);
+  formData.append("image", image);
+  formData.append("price", parseFloat(price));
+
+  try {
+    const res = await fetch("/wishlist/add", {
+      method: "POST",
+      credentials: "include",
+      body: formData
+    });
+    const result = await res.json();
+    alert(result.success ? `✅ ${name} added to wishlist!` : result.message);
+  } catch (err) {
+    alert("❌ Network error");
+  }
+}
+
+/*Dynamic Product View  */
+const offerGrid = document.querySelector(".grid-container");
+
+//product data
+const offers = {
+  offer1: { name: "Banarasi Saree", image: "images/offer/offer1.jpg", price: 1299, desc: "Women's Banarasi Saree Pure Kanjivaram Silk Saree Soft 2025 Design With Blouse Piece.", category: "Saree", offer: "20% OFF" },
+  offer2: { name: "Kurta with Jacket", image: "images/offer/offer2.jpg", price: 1599, desc: "Ethluxis ® Men's Silk Blend Kurta with Jacket Set.", category: "Kurta", offer: "15% OFF" },
+  offer3: { name: "Spy Pen Camera", image: "images/offer/offer3.jpg", price: 2499, desc: "TECHNOVIEW Spy 1080P Full Hd Pen Camera Hidden 100 Minutes Pen Battery Life.", category: "Camera", offer: "40% OFF" },
+  offer4: { name: "Kadence Guitar", image: "images/offer/offer4.jpg", price: 8999, desc: "Kadence Acoustica Series Acoustic Guitar – 40'' Grand Auditorium Ashwood Body.", category: "Guitar", offer: "25% OFF" },
+  offer5: { name: "Self-Discovery Book", image: "images/offer/offer5.jpg", price: 499, desc: "You Only Live Once: A Journey of Self-Discovery and Empowerment | Personal Growth.", category: "Book", offer: "30% OFF" },
+  offer6: { name: "Deer Paintings", image: "images/offer/offer6.jpg", price: 1199, desc: "SAF Deer Paintings for Wall Decoration - Set Of 3, 3d modern art Painting for Living Room.", category: "Painting", offer: "30% OFF" }
+};
+
+//dynamic product view
+const productView = document.createElement('div');
+productView.id = "productView";
+productView.style.display = "none";
+productView.style.padding = "40px 20px";
+productView.style.textAlign = "center";
+offerGrid.parentNode.insertBefore(productView, offerGrid.nextSibling);
+
+//show product
+function showOffer(id) {
+  const p = offers[id];
+  if (!p) return;
+
+  productView.innerHTML = `
+    <button id="backBtn" style="margin-bottom:20px;padding:10px 20px;border:none;background:#232f3e;color:white;border-radius:20px;cursor:pointer;">⬅ Back</button>
+    <img src="${p.image}" alt="${p.name}" style="width:100%;max-width:400px;border-radius:15px;margin-bottom:15px;">
+    <h2 style="margin:10px 0;">${p.name}</h2>
+    <p><b>Offer:</b> ${p.offer}</p>
+    <p><b>Category:</b> ${p.category}</p>
+    <p><b>Price:</b> ₹${p.price}</p>
+    <p>${p.desc}</p>
+    <button onclick="addToWishlist('${id}', '${p.name}', '${p.image}', ${p.price})" style="margin-top:15px;">❤️ Wishlist</button>
+  `;
+
+  offerGrid.style.display = "none";
+  productView.style.display = "block";
+
+  document.getElementById("backBtn").onclick = () => {
+    productView.style.display = "none";
+    offerGrid.style.display = "grid";
+  };
+}
+
+//click event to offer images
+document.querySelectorAll(".grid-container .card img").forEach(img => {
+  img.addEventListener("click", (e) => {
+    const card = e.target.closest(".card");
+    const id = card.querySelector(".wishlist-btn").dataset.id;
+    showOffer(id);
+  });
+});
+
+</script>
+
+</body>
+</html>

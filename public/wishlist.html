@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Wishlist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/ash.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+      margin: 0;
+    }
+    header {
+      background: #131921;
+      color: white;
+      padding: 5px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 15px;
+    }
+    .wishlist-container {
+      max-width: 1200px;
+      margin: 5px 5px;
+      padding: 10px;
+    }
+    .wishlist-title {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #232f3e;
+      text-align: center;
+    }
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .wishlist-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+    .wishlist-card:hover {
+      transform: translateY(-5px);
+    }
+    .wishlist-image {
+      width: 100%;
+      height: 200px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 0px;
+    }
+    .wishlist-card h2 {
+      font-size: 17px;
+      margin: 5px 0;
+      text-align: center;
+      color: #333;
+    }
+    .price {
+      font-size: 15px;
+      color: #b12704;
+      margin-bottom: 8px;
+    }
+    .remove-btn {
+      background: #2e1b37;
+      border: none;
+      color: white;
+      padding: 8px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      font-weight: bold;
+    }
+    .remove-btn:hover {
+      background: #493064;
+    }
+    .empty {
+      text-align: center;
+      font-size: 15px;
+      margin-top: 30px;
+      color: #666;
+    }
+   
+  </style>
+</head>
+<body>
+   <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+<!-- Cart Icon -->
+  <symbol id="icon-cart" viewBox="0 0 24 24">
+    <circle cx="9" cy="21" r="1.5" fill="currentColor"/>
+    <circle cx="18" cy="21" r="1.5" fill="currentColor"/>
+    <path d="M2 2h3l3.6 7.59L8 14a2 2 0 002 2h9a2 2 0 001.92-1.45l3-10A1 1 0 0022 3H6" 
+      stroke="currentColor" stroke-width="2" fill="none"/>
+  </symbol>
+</svg>
+<header>
+    <div class="nav-logo border">
+    <div class="logo"></div>
+  </div>
+   <h4>Wishlist<svg class="icon" width="15" height="10"><use href="#icon-cart"></use></svg></h4><a href="index.html" style="color:rgba(255, 255, 255, 0.918); text-decoration:none;">🏠 Back to Home</a>
+  </header>
+
+  <div class="wishlist-container">
+    <h2 class="wishlist-title">Your Saved Items</h2>
+    <div id="wishlistGrid" class="wishlist-grid"></div>
+    <p id="emptyMessage" class="empty" style="display:none;">Your wishlist is empty 😔</p>
+  </div>
+
+  <script>
+    async function loadWishlist() {
+  try {
+    const res = await fetch("/wishlist", { credentials: "include" });
+    const data = await res.json();
+    const grid = document.getElementById("wishlistGrid");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    if (!data.success || !data.wishlist.length) {
+      grid.innerHTML = "";
+      emptyMessage.style.display = "block";
+      return;
+    }
+
+    emptyMessage.style.display = "none";
+
+    grid.innerHTML = data.wishlist.map(item => `
+      <div class="wishlist-card">
+        <div class="wishlist-image" style="background-image:url('${item.image}')"></div>
+        <h2>${item.name}</h2>
+        <span class="price">₹${item.price}</span>
+        <button class="remove-btn" data-id="${item.productId}">Remove</button>
+      </div>
+    `).join('');
+
+// REMOVE BUTTON
+    document.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const productId = btn.dataset.id;
+
+        const formData = new FormData();
+        formData.append("productId", productId);
+
+        await fetch('/wishlist/remove', {
+          method: 'POST',
+          body: formData,
+          credentials: "include"
+        });
+
+        loadWishlist();
+      });
+    });
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+loadWishlist();
+
+  </script>
+</body>
+</html>

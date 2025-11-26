@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ash - Product</title>
+  <link rel="stylesheet" href="ash.css">
+  <style>
+#customer{
+  margin-left: 20px;
+} 
+#wishlistNav{
+  margin-left: 80px;
+}
+#buyNow:hover {
+  background-color: #ff9900;
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+#addToWishlist{ 
+  padding: 10px auto;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="nav-logo border">
+        <div class="logo"></div>
+      </div>
+     <div class="navsignin border" id="userProfile">
+        <p><span id="customer">Sign In<br><b>Accounts & Lists</b></span></p>
+      </div>
+      <h4 id="wishlistNav" class="border" style="cursor:pointer;">❤️ Wishlist</h4>
+    </div>
+  </header>
+
+  <!-- Product details -->
+  <div class="product-details" style="padding: 20px; text-align: center;">
+    <img id="product-image" src="" alt="Product Image" style="width:250px; height:250px; border-radius:10px; margin-bottom:20px;">
+    <h1 id="product-name"></h1>
+    <h3 id="product-price"></h3>
+    <p id="product-description" style="max-width:500px; margin:auto; color:#555;"></p>
+    <button id="addToWishlist" style="padding: 10px; border:none; margin-top: 10px; color:white; padding:8px 12px; border-radius:5px; width:10rem;" class="wishlist-btn">❤️ Add to Wishlist</button> <br>
+    <button id="buyNow" style="background-color:rgb(127, 67, 180); border:none; margin-top: 10px; color:white; padding:8px 12px; border-radius:5px; cursor:pointer;">Buy Now</button>
+    </div>
+
+  <footer style="text-align:center; margin-top:20px;">
+    <p>© 2025 Ash Legacy Fashion</p>
+
+  </footer>
+
+  <script src="product.js"></script>
+</body>
+</html>

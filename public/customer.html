@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Service - Ash Legacy Fashion</title>
+  <link rel="stylesheet" href="/public/ash.css">
+  <style>
+    .help-container {
+      max-width: 1200px;
+      margin: 10px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .help-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .help-header h2 {
+      color: #222;
+      font-size: 2rem;
+      margin-bottom: 7px;
+    }
+
+    .help-header p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .help-sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .help-card {
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background-color: #fafafa;
+      transition: all 0.3s ease;
+    }
+
+    .help-card:hover {
+      background-color: #f3f3f3;
+      transform: translateY(-3px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .help-card h3 {
+      font-size: 1.2rem;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .help-card p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .help-card a {
+      color: rgb(255, 175, 16);
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .help-footer-text {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .help-card h3 {
+        font-size: 1rem;
+      }
+      .help-header h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR  -->
+  <header>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+      <symbol id="icon-user" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" fill="none"/>
+      </symbol>
+      <symbol id="icon-cart" viewBox="0 0 24 24">
+        <circle cx="9" cy="21" r="1.5" fill="currentColor"/>
+        <circle cx="18" cy="21" r="1.5" fill="currentColor"/>
+        <path d="M2 2h3l3.6 7.59L8 14a2 2 0 002 2h9a2 2 0 001.92-1.45l3-10A1 1 0 0022 3H6" 
+          stroke="currentColor" stroke-width="2" fill="none"/>
+      </symbol>
+    </svg>
+
+    <div class="navbar">
+      <div class="nav-logo border">
+        <div class="logo"></div>
+      </div>
+      <div class="navaddress border">
+        <svg class="icon" width="25" height="10" viewBox="0 0 22 22">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <p id="para">Deliver to<br><b>India</b></p>
+      </div>
+      <div class="navsearch border">
+        <div class="search">
+          <select id="filter">
+            <option value="all">All</option>
+            <option value="clothes">Clothes</option>
+            <option value="Jwellary">Jwellary</option>
+            <option value="furniture">Furniture</option>
+            <option value="electronics">Electronics</option>
+            <option value="Beauty Picks">Beauty Picks</option>
+          </select>
+          <input id="se" placeholder="Search Best Product's on Ash Lagecy Fashion">
+        </div>
+      </div>
+      <div class="navsignin border" id="userProfile">
+        <svg class="icon" width="12" height="13"><use href="#icon-user"></use></svg>
+        <p><span id="customer">Sign In<br><b>Accounts & Lists</b></span></p>
+      </div>
+      <h4 id="wishlistNav" class="border" style="cursor:pointer;">
+        <svg class="icon" width="18" height="15"><use href="#icon-cart"></use></svg>
+        Wishlist
+      </h4>
+    </div>
+
+    <div class="panel">
+      <div class="panelops">
+        <p>Today's Deals</p>
+        <p><a href="customer.html" style="text-decoration:none; color:inherit;">Customer</a></p>
+        <p><a href="form.html"></a>Registry</p>
+        <p><a href="card.html" style="text-decoration:none; color:inherit;">Gift Cards</a></p>
+        <p><a href="offer.html" style="text-decoration:none; color:inherit;">Sell's</a></p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Help Content -->
+  <div class="help-container">
+    <div class="help-header">
+      <h2>Hello. What can we help you with?</h2>
+      <p>Find answers to your orders, payments, returns, and more.</p>
+    </div>
+
+    <div class="help-sections">
+      <div class="help-card">
+        <h3>Your Orders</h3>
+        <p>Track packages, edit or cancel orders.</p>
+        <a href="#">Go to Your Orders</a>
+      </div>
+      <div class="help-card">
+        <h3>Returns & Refunds</h3>
+        <p>Return or exchange items, check refund status.</p>
+        <a href="#">Returns Help</a>
+      </div>
+      <div class="help-card">
+        <h3>Manage Addresses</h3>
+        <p>Update or add new delivery addresses.</p>
+        <a href="#">Manage Address</a>
+      </div>
+      <div class="help-card">
+        <h3>Payment Settings</h3>
+        <p>Add, edit, or change your payment methods.</p>
+        <a href="payment.html">Payment Help</a>
+      </div>
+      <div class="help-card">
+        <h3>Account Settings</h3>
+        <p>Change email, password, or account info.</p>
+        <a href="form.html">Account Info</a>
+      </div>
+      <div class="help-card">
+        <h3>Offers & Prime Benefits</h3>
+        <p>Learn about deals, membership, and offers.</p>
+        <a href="offer.html">View Offers</a>
+      </div>
+      <div class="help-card">
+        <h3>Shipping & Delivery</h3>
+        <p>Understand shipping times and delivery options.</p>
+        <a href="#">Shipping Info</a>
+      </div>
+      <div class="help-card">
+        <h3>Contact Support</h3>
+        <p>Need more help? Chat or email our support team.</p>
+        <a href="form.html">Contact Us</a>
+      </div>
+    </div>
+
+    <div class="help-footer-text">
+      <p>For more details on live sale events, offers, and cashback — visit our <a href="offer.html">Sale Events</a> page.</p>
+    </div>
+  </div>
+
+  <!--  Footer -->
+  <footer>
+    <div class="footpanel1">Back to Top</div>
+    <div class="footpanel2">
+      <ul>
+        <p>Your Account</p>
+        <a>Your Orders</a>
+        <a>Your Recently viewed Items</a>
+        <a href="wishlist.html">Your Lists</a>
+        <a>Product Safty Alerts</a>
+        <a>Returns</a>
+        <a href="offer.html">Ash Sells</a>
+      </ul>
+      <ul>
+        <p>About Ash Legacy</p>
+        <a>App Download</a>
+        <a>Free Delivery On First Order</a>
+        <a>About Fashion</a>
+        <a>Tnvestor Relations</a>
+        <a>Devices</a>
+        <a>Science</a>
+      </ul>
+      <ul>
+        <p>Ash Deals</p>
+        <a>Careers</a>
+        <a>Blog</a>
+        <a>Cards</a>
+        <a>Investor Relations</a>
+        <a>Shops</a>
+        <a>Internship Blog</a>
+      </ul>
+      <ul>
+        <p>Get to Know Us</p>
+        <a>Careers</a>
+        <a>Tnvestor Relations</a>
+        <a>About Alf.com</a>
+        <a>Service Relations</a>
+        <a>Devices</a>
+        <a>ASH LEGACY</a>
+      </ul>
+    </div>
+    <div class="footpanel3">
+      <div class="logo"></div>
+    </div>
+    <div class="footpanel4">
+      <div class="pages">
+        <a>Conditions of Use</a>
+        <a>Privacy Notice</a>
+        <a>Your Ads Privacy Choices</a>
+      </div>
+      <div class="copywright">1996-2025, ashlegacyfashion.com, Inc. or its affiliates</div>
+    </div>
+  </footer>
+
+  <script>
+    // customer sign-in 
+    async function checkUser() {
+      const res = await fetch("/user", { credentials: "include" });
+      const data = await res.json();
+      const customerBtn = document.getElementById("customer");
+      if (data.loggedIn) {
+        customerBtn.innerHTML = `Hello, ${data.user.name}<br><b>Sign Out</b>`;
+        customerBtn.onclick = async () => {
+          await fetch("/logout", { method: "POST", credentials: "include" });
+          window.location.reload();
+        };
+      } else {
+        customerBtn.innerHTML = `Sign In<br><b>Accounts & Lists</b>`;
+        customerBtn.onclick = () => window.location.href = "form.html";
+      }
+    }
+    checkUser();
+
+    // Wishlist navigation
+   const wishlistNav = document.getElementById("wishlistNav");
+  wishlistNav.addEventListener("click", () => {
+    window.location.href = "wishlist.html";
+  });
+  </script>
+</body>
+</html>

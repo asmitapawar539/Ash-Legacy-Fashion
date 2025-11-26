@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ash Pay | Secure Checkout</title>
+  <link rel="stylesheet" href="ash.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f3f3f3;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ash-container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 25px 30px;
+    }
+
+    .product-summary {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .product-summary img {
+      width: 130px;
+      border-radius: 10px;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-info h2 {
+      margin: 0;
+      color: #232f3e;
+    }
+
+    .product-info p {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .price {
+      color: #392f70;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .payment-section {
+      margin-top: 20px;
+    }
+
+    .payment-section h3 {
+      color: #232f3e;
+      margin-bottom: 10px;
+    }
+
+    .payment-modes label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    .payment-details {
+      display: none;
+      margin: 10px 0 18px 0;
+      text-align: left;
+      font-size: 0.9em;
+    }
+
+    .payment-details input, .payment-details select {
+      width: 70%;
+      padding: 8px;
+      margin: 4px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .ash-pay-btn {
+      background: #1a293b;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .ash-pay-btn:hover {
+      background: #151c25;
+    }
+
+    .status-section {
+      margin-top: 25px;
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 0.95em;
+      display: none;
+    }
+
+    .success-msg {
+      color: green;
+      font-weight: bold;
+      display: none;
+      margin-top: 10px;
+    }
+
+    .cancel-btn {
+      background: #211f42;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+
+    .cancel-btn:hover {
+      background: #07060a;
+    }
+  </style>
+</head>
+<body>
+
+<div class="ash-container">
+  <h2 style="text-align:center;">Ash Pay - Secure Checkout</h2>
+
+  <!-- Product Summary -->
+  <div class="product-summary">
+    <img id="productImage" src="" alt="Product Image">
+    <div class="product-info">
+      <h2 id="productName">Loading...</h2>
+      <p id="productDesc"></p>
+      <div class="price" id="productPrice"></div>
+    </div>
+  </div>
+
+  <!-- Payment Section -->
+  <div class="payment-section">
+    <h3>Choose Payment Method</h3>
+    <div class="payment-modes">
+      <label><input type="radio" name="paymentMode" value="UPI"> UPI</label>
+      <label><input type="radio" name="paymentMode" value="Card"> Debit / Credit Card</label>
+      <label><input type="radio" name="paymentMode" value="NetBanking"> Net Banking</label>
+      <label><input type="radio" name="paymentMode" value="Wallet"> Ash Pay Wallet</label>
+      <label><input type="radio" name="paymentMode" value="COD"> Cash on Delivery</label>
+    </div>
+
+    <div id="upiDetails" class="payment-details">
+      <label>Enter UPI ID:</label>
+      <input type="text" placeholder="example@upi">
+    </div>
+
+    <div id="cardDetails" class="payment-details">
+      <label>Card Number:</label>
+      <input type="text" maxlength="16" placeholder="1234 5678 9012 3456">
+      <label>Expiry Date:</label>
+      <input type="text" placeholder="MM/YY"><br>
+      <label>CVV:</label>
+      <input type="password" maxlength="3" placeholder="***">
+    </div>
+
+    <div id="netbankingDetails" class="payment-details">
+      <label>Select Bank:</label>
+      <select>
+        <option value="">--Choose Bank--</option>
+        <option>SBI</option>
+        <option>HDFC</option>
+        <option>ICICI</option>
+        <option>Axis Bank</option>
+      </select>
+    </div>
+
+    <button class="ash-pay-btn">Pay Now</button>
+    <div id="successMsg" class="success-msg"></div>
+  </div>
+
+  <!-- Order Status-->
+  <div class="status-section" id="orderStatus">
+    <p><b>Order Tracking:</b> <span id="trackingStatus">Processing...</span></p>
+    <p><b>Estimated Delivery:</b> <span id="deliveryDate"></span></p>
+    <button class="cancel-btn" id="cancelOrder">Cancel Order</button>
+  </div>
+</div>
+
+<script>
+  // Load product dynamically 
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+
+    const products = {
+      prod1: { name: "Clothes", price: 999, desc: "Trendy and comfortable clothes.", image: "images/box1_image.jpg" },
+      prod2: { name: "Health Care", price: 999, desc: "Top-quality healthcare essentials.", image: "images/box2_image.jpg" },
+      prod3: { name: "Furniture", price: 999, desc: "Elegant furniture to elevate your home.", image: "images/box3_image.jpg" },
+      prod4: { name: "Electronics", price: 999, desc: "Latest electronic gadgets.", image: "images/box4_image.jpg" },
+      prod5: { name: "Beauty Picks", price: 999, desc: "Top beauty products for daily care.", image: "images/box5_image.jpg" },
+      prod6: { name: "Pet Care", price: 999, desc: "Best items for your pets’ health.", image: "images/box6_image.jpg" },
+      prod7: { name: "New Arrivals Toys", price: 999, desc: "Fun and learning toys for all ages.", image: "images/box7_image.jpg" },
+      prod8: { name: "Fashion Trends", price: 999, desc: "Latest fashion accessories and styles.", image: "images/box8_image.jpg" },
+      prod9: { name: "Jwellary Trends", price: 999, desc: "Stylish jewelry to match your look.", image: "images/box9_image.jpg" }
+    };
+
+    const product = products[productId] || products.prod1;
+
+    document.getElementById('productName').innerText = product.name;
+    document.getElementById('productDesc').innerText = product.desc;
+    document.getElementById('productPrice').innerText = `₹${product.price}`;
+    document.getElementById('productImage').src = product.image;
+  });
+
+  // Payment Mode
+  const modes = document.querySelectorAll('input[name="paymentMode"]');
+  const details = {
+    UPI: document.getElementById('upiDetails'),
+    Card: document.getElementById('cardDetails'),
+    NetBanking: document.getElementById('netbankingDetails'),
+    Wallet: null,
+    COD: null
+  };
+
+  modes.forEach(mode => {
+    mode.addEventListener('change', () => {
+      for (let key in details) {
+        if (details[key]) details[key].style.display = 'none';
+      }
+      if (details[mode.value]) details[mode.value].style.display = 'block';
+    });
+  });
+
+  //  Payment Process 
+  document.querySelector('.ash-pay-btn').addEventListener('click', function() {
+    const selectedMode = document.querySelector('input[name="paymentMode"]:checked');
+    const msg = document.getElementById('successMsg');
+    const statusBox = document.getElementById('orderStatus');
+    const tracking = document.getElementById('trackingStatus');
+    const delivery = document.getElementById('deliveryDate');
+
+    if (!selectedMode) {
+      msg.style.display = 'block';
+      msg.style.color = 'red';
+      msg.innerText = '⚠️ Please select a payment mode';
+      return;
+    }
+
+    // Simulate Payment
+    msg.style.display = 'block';
+    msg.style.color = 'green';
+    msg.innerText = `✅ Payment successful via ${selectedMode.value}`;
+
+    // Show order tracking section
+    statusBox.style.display = 'block';
+    tracking.innerText = 'Order Confirmed ✅';
+    const estimated = new Date();
+    estimated.setDate(estimated.getDate() + 5);
+    delivery.innerText = estimated.toDateString();
+  });
+
+  // Cancel Order
+  document.getElementById('cancelOrder').addEventListener('click', () => {
+    const tracking = document.getElementById('trackingStatus');
+    tracking.innerText = 'Order Canceled ❌';
+    tracking.style.color = 'red';
+    alert('Your order has been canceled successfully.');
+  });
+</script>
+
+</body>
+</html>

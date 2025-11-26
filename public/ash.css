@@ -1,0 +1,448 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #111;
+  line-height: 1.4;
+}
+.navbar .icon {
+  vertical-align: middle;
+  margin-right: 0px;
+  fill: none;
+  stroke: white; 
+}
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #131921;
+  color: white;
+  padding: 8px 15px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+  @media (max-width: 480px) {
+      .logo {
+        width: 10px;
+      }
+        .navaddress,
+       .search select{
+        display:none ;
+       }
+       .search input::placeholder,
+      #wishlistNav {
+        font-size: 12px;
+        margin-left: 4px;
+      }
+
+      .panelops p{
+        font-size: 11px;
+        gap: 6px;
+      }
+       .footpanel2 ul:nth-last-child(-n+2) {
+        display: none;
+     }   
+    }
+
+
+.navbar .border {
+  border: 1px solid transparent; 
+  padding: 1px;
+  cursor: pointer;
+  border-radius: 2px; 
+  transition: border 0.1s ease, background 0.1s ease;
+}
+
+.navbar .border:hover {
+  border: 0.8px solid white;  
+  background-color: rgba(18, 17, 17, 0.555); 
+}
+.panelops p {
+  display: inline-block;
+  padding: 5px 7px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+.panelops p:hover {
+  border: 0.8px solid white;
+  background-color: rgba(167, 146, 146, 0.386);
+}
+
+/* Logo */
+.nav-logo {
+  cursor: pointer;
+}
+
+.nav-logo .logo {
+  background-image: url('images/ash_logo.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+  width: 90px;
+  height:60px;
+}
+
+.navaddress p {
+  font-size: 10px;
+  line-height: 1;
+  cursor: default;
+}
+
+.navaddress b {
+  font-size: 14px;
+}
+
+.navsearch {
+  flex: 1;
+  min-width: 50px;
+}
+
+.search {
+  display: flex;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#filter option:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.search select {
+  border: none;
+  padding: 8px 8px;
+  background-color: #f3f3f3;
+  cursor: pointer;
+  font-size: 20px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.search input {
+  flex: 1;
+  padding: 8px 8px;
+  border: none;
+  font-size: 15px;
+outline: none;
+}
+.search input::placeholder {
+  font-weight: normal;
+  color: #999;
+}
+
+/* Sign in*/
+.navsignin, .navreturn {
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  width: 70px;
+  line-height:0.9;
+}
+
+.navsignin span, .navreturn span {
+  color: white;
+  font-weight: normal;
+}
+
+.navsignin b {
+  font-weight: 700;
+  font-size: 12px;
+  color: white;
+}
+
+.navreturn span {
+  font-weight: 400;
+  color: white;
+}
+
+.panel{
+    height: 40px;
+    background-color:#222f3d;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.panelops p{
+    display: inline;
+    margin-left:30px;
+}
+.panelops{
+    width: 70%;
+    font-size: 1rem;
+    font-weight:500;
+}
+
+/* Hero section */
+.herosection {
+  background-image: url("images/hero_image.jpg");
+  background-size: cover;
+  background-position: center; 
+  height: 400px;
+  display: flex;
+  justify-content: center;
+}
+.heromsg h3 {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  max-width: 500px;
+  font-size: 20px;
+  color: #251d3bed;
+  margin-top: 2cm;
+  word-spacing: 3px;
+}
+
+.heromsg a {
+  color: #000000;
+  cursor: pointer;
+  font-size:15px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.heromsg a:hover {
+  text-decoration: underline;
+}
+
+/* Shop Section */
+.shopsection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px, 1fr));
+  gap: 65px;
+  padding: 33px 28px;
+  max-width: 1500px;
+  margin: 0 auto 10px;
+}
+
+.box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease;
+}
+
+.box:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.boxcontent {
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.boxcontent h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.boximg {
+  background-size: cover;
+  background-position: center;
+  height: 240px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* See more */
+.boxcontent p {
+  color: #0073bb;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: auto;
+  cursor: pointer;
+}
+
+.boxcontent p:hover {
+  text-decoration: underline;
+}
+
+/* Footer*/
+.footer{
+    margin-top: 15px;
+}
+.footpanel1{
+background-color:#374758;
+color: white;
+height:28px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size:1rem;
+}
+.footpanel2{
+  font-size:1.2rem;
+    background-color:#222f3d;
+    color: white;
+    height: 190px;
+  display: flex;
+  justify-content: space-evenly;
+}
+ul{
+    margin-top:8px;
+}
+ul a{
+  font-size: 0.8rem;
+    display: block;
+    margin-top:5px;
+    color: #dddddd;
+    text-decoration: none;
+}
+ul a:hover{
+  text-decoration: underline;
+}
+.footpanel3{
+    background-color:#222f3d;
+    color: white;
+    border-top:0.8px solid white;
+    height:60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo{
+    background-image:url("images/ash_logo.png");
+    height:37px;
+    background-size:cover;
+    width:90px;
+}
+.footpanel4{
+    background-color:#0d041f;
+    color: white;
+    height:55px;
+    font-size: 0.7rem;
+text-align: center;
+}
+.pages{
+padding-top:5px;
+}
+.copywright{
+margin-top: 5px;
+}
+
+.profile-dropdown a {
+  text-decoration: none;
+  color: #111;
+  display: block;
+  padding: 10px 0;
+}
+.profile-dropdown a:hover {
+  background: #f0f0f0;
+}
+
+/* Modal*/
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.6); 
+}
+
+.modal-content {
+  background: #fff;
+  margin: 8% auto;
+  padding: 10px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close:hover {
+  color: #000;
+}
+
+/* Form styles */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.auth-form input {
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #ff9900;
+  box-shadow: 0 0 5px rgba(255,153,0,0.5);
+}
+
+.auth-form button {
+  background: #ff9900;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 15px;
+}
+.auth-form button:hover {
+  background: #e68a00;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Wishlist Button */
+.wishlist-btn {
+  width: 50%;
+  background: #2a1d3f;          
+  border: 0.5px solid #151618;    
+  border-radius: 3px;
+  padding: 5px 0;
+  font-size: 10px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.wishlist-btn:hover {
+  background: #4d318c;          
+  transform: translateY(-1px);  
+}
+.wishlist-btn:active {
+  background: #3d2943;         
+  transform: translateY(0);
+}
+
+
+
+
+
+

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ash Legacy Fashion</title>
+  <link rel="stylesheet" href="ash.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fefefe;
+    }
+
+    .card-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 30px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      opacity: 0;
+      transform: translateY(40px);
+      background: linear-gradient(145deg, #ffffff, #f2f2f2);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.4s, box-shadow 0.4s, opacity 0.6s ease;
+      position: relative;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s;
+      cursor: pointer;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card .category-label {
+      position: absolute;
+      top: 7px;
+      left: 10px;
+      background-color: #d794f4;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 0.75em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      margin: 15px 0 10px;
+      font-size: 1.4em;
+      color: #222;
+    }
+
+    .card p {
+      padding: 0 15px;
+      font-size: 1em;
+      color: #666;
+    }
+
+    .card button {
+      margin: 15px 0 20px;
+      padding: 10px 25px;
+      border: none;
+      background-color: #8757b4;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .card button:hover {
+      background-color: #5a436c;
+    }
+
+    footer {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 25px;
+      margin-top: 50px;
+      font-size: 0.95em;
+    }
+
+    footer a {
+      color: #d794f4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="navbar">
+      <div class="nav-logo border"><div class="logo"></div></div>
+      <div class="navaddress border">
+        <p id="para">Deliver to<br><b>India</b></p>
+      </div>
+      <div class="navsearch border">
+        <div class="search">
+          <select id="filter">
+            <option value="all">All</option>
+            <option value="clothes">Clothes</option>
+            <option value="Jwellary">Jwellary</option>
+            <option value="furniture">Furniture</option>
+            <option value="electronics">Electronics</option>
+            <option value="Beauty Picks">Beauty Picks</option>
+          </select>
+          <input id="se" placeholder="Search Best Product's on Ash Legacy Fashion">
+        </div>
+      </div>
+      <div class="navsignin border" id="userProfile">
+        <p><span id="customer">Sign In<br><b>Accounts & Lists</b></span></p>
+      </div>
+      <h4 id="wishlistNav" class="border" style="cursor:pointer;">Wishlist</h4>
+    </div>
+  </header>
+
+  <!-- Card Section -->
+  <section class="card-section">
+
+    <!-- CARD 1 -->
+    <div class="card" data-id="card1">
+      <div class="category-label">Clothes</div>
+      <img src="images/c1.jpg" alt="Elegant Dress">
+      <h3>Elegant Dress</h3>
+      <p>Perfect for every occasion.</p>
+      <button class="wishlist-btn"
+        data-id="card1"
+        data-name="Elegant Dress"
+        data-image="images/c1.jpg"
+        data-price="999"
+      >❤️ Wishlist</button>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card" data-id="card2">
+      <div class="category-label">Home</div>
+      <img src="images/c2.jpg" alt="Decorative Basket">
+      <h3>Decorative Basket</h3>
+      <p>Handcrafted and stylish.</p>
+      <button class="wishlist-btn"
+        data-id="card2"
+        data-name="Decorative Basket"
+        data-image="images/c2.jpg"
+        data-price="599"
+      >❤️ Wishlist</button>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card" data-id="card3">
+      <div class="category-label">Decor</div>
+      <img src="images/c3.jpg" alt="Artistic Frame">
+      <h3>Artistic Frame</h3>
+      <p>Add elegance to your home.</p>
+      <button class="wishlist-btn"
+        data-id="card3"
+        data-name="Artistic Frame"
+        data-image="images/c3.jpg"
+        data-price="399"
+      >❤️ Wishlist</button>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="card" data-id="card4">
+      <div class="category-label">Jewelry</div>
+      <img src="images/c4.jpg" alt="Fancy Jewelry">
+      <h3>Fancy Jewelry</h3>
+      <p>Shine bright with our collection.</p>
+      <button class="wishlist-btn"
+        data-id="card4"
+        data-name="Fancy Jewelry"
+        data-image="images/c4.jpg"
+        data-price="1299"
+      >❤️ Wishlist</button>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 <b>Ash Legacy Fashion</b>. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+
+   /*User Login Status */
+async function checkUser() {
+  const res = await fetch("/user", { credentials: "include" });
+  const data = await res.json();
+
+  const customerBtn = document.getElementById("customer");
+
+  if (data.loggedIn) {
+    customerBtn.innerHTML = `Hello, ${data.user.name}<br><b>Sign Out</b>`;
+    customerBtn.onclick = async () => {
+      await fetch("/logout", { method: "POST", credentials: "include" });
+      window.location.reload();
+    };
+  } else {
+    customerBtn.innerHTML = `Sign In<br><b>Accounts & Lists</b>`;
+    customerBtn.onclick = () => {
+      window.location.href = "form.html";
+    };
+  }
+}
+checkUser();
+
+/*Card Animation*/
+document.querySelectorAll('.card').forEach((card, index) => {
+  setTimeout(() => card.classList.add('visible'), index * 300);
+});
+
+/*Wishlist*/
+async function addToWishlist(id, name, image, price) {
+  const formData = new FormData();
+  formData.append("productId", id);
+  formData.append("name", name);
+  formData.append("image", image);
+  formData.append("price", parseFloat(price));
+
+  const res = await fetch("/wishlist/add", {
+    method: "POST",
+    credentials: "include",
+    body: formData
+  });
+
+  const result = await res.json();
+  alert(result.success ? `✅ ${name} added to wishlist!` : result.message);
+}
+
+document.querySelectorAll(".wishlist-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const id = btn.dataset.id;
+    const name = btn.dataset.name;
+    const image = btn.dataset.image;
+    const price = btn.dataset.price;
+    addToWishlist(id, name, image, price);
+  });
+});
+
+/*Wishlist Page Navigation */
+document.getElementById("wishlistNav").addEventListener("click", () => {
+  window.location.href = "wishlist.html";
+});
+
+/* Dynamic Product View*/
+const cardSection = document.querySelector('.card-section');
+
+const products = {
+  card1: { name: "Elegant Dress", image: "images/c1.jpg", price: 999, desc: "Perfect for every occasion.", category: "Clothes" },
+  card2: { name: "Decorative Basket", image: "images/c2.jpg", price: 599, desc: "Handcrafted and stylish.", category: "Home" },
+  card3: { name: "Artistic Frame", image: "images/c3.jpg", price: 399, desc: "Add elegance to your home.", category: "Decor" },
+  card4: { name: "Fancy Jewelry", image: "images/c4.jpg", price: 1299, desc: "Shine bright with our collection.", category: "Jewelry" }
+};
+
+//  dynamic product view
+const productView = document.createElement('div');
+productView.id = "productView";
+productView.style.display = "none";
+productView.style.padding = "40px 20px";
+productView.style.textAlign = "center";
+cardSection.parentNode.insertBefore(productView, cardSection.nextSibling);
+
+// Show product dynamically
+function showProduct(id) {
+  const p = products[id];
+  if (!p) return;
+
+  productView.innerHTML = `
+    <button id="backBtn" style="margin-bottom:30px;padding:12px 20px;border:none;background:#8757b4;color:white;border-radius:20px;cursor:pointer;">⬅ Back</button>
+    <img src="${p.image}" alt="${p.name}" style="width:100%;max-width:400px;border-radius:15px;">
+    <h2 style="margin:20px 0 10px;">${p.name}</h2>
+    <p><b>Category:</b> ${p.category}</p>
+    <p><b>Price:</b> ₹${p.price}</p>
+    <p>${p.desc}</p>
+    <button onclick="addToWishlist('${id}', '${p.name}', '${p.image}', ${p.price})" style="margin-top:15px;padding:10px 20px;border:none;background:#8757b4;color:white;border-radius:10px;cursor:pointer;">❤️ Wishlist</button>
+  `;
+
+  cardSection.style.display = "none";
+  productView.style.display = "block";
+
+  document.getElementById("backBtn").onclick = () => {
+    productView.style.display = "none";
+    cardSection.style.display = "grid";
+  };
+}
+
+// click event to card images
+document.querySelectorAll('.card img').forEach(img => {
+  img.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    const id = card.dataset.id;
+    showProduct(id);
+  });
+});
+
+  </script>
+
+</body>
+</html>
