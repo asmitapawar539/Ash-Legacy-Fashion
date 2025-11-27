@@ -1,7 +1,8 @@
 fastapi
 uvicorn
 motor
-passlib[bcrypt]
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
 python-multipart
 jinja2
 itsdangerous
@@ -14,4 +15,5 @@ fastapi-cli
 ujson
 annotated-types
 python-dotenv
+
 
