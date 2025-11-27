@@ -242,14 +242,26 @@ async function addToWishlist(id, name, image, price) {
   formData.append("image", image);
   formData.append("price", parseFloat(price));
 
-  const res = await fetch("/wishlist/add", {
-    method: "POST",
-    credentials: "include",
-    body: formData
-  });
+  try {
+    const res = await fetch("/wishlist/add", {
+      method: "POST",
+      credentials: "include",
+      body: formData
+    });
 
-  const result = await res.json();
-  alert(result.success ? `✅ ${name} added to wishlist!` : result.message);
+    // Check if user is Not logged in
+    if (res.status === 401) {
+      alert("⚠️ Login required!");
+      window.location.href = "form.html"; // redirect to login page
+      return;
+    }
+
+    const result = await res.json();
+    alert(result.success ? `✅ ${name} added to wishlist!` : result.message);
+
+  } catch (err) {
+    alert("❌ Network error");
+  }
 }
 
 document.querySelectorAll(".wishlist-btn").forEach(btn => {
