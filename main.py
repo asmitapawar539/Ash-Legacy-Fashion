@@ -9,20 +9,22 @@ from bson import ObjectId
 from models.user_model import User
 import os
 
-#  Local MongoDB
-MONGO_URI = "mongodb://localhost:27017"
-SESSION_SECRET = "ASHCOSMETICSESSIONSECRETKEY1234567890"
-# Initialize FastAPI 
+from dotenv import load_dotenv
+load_dotenv()
+
+#MongoDB Atlas URI 
+MONGO_URI = os.getenv("MONGO_URI")
+SESSION_SECRET = os.getenv("SESSION_SECRET")
+
 app = FastAPI(title="Ash Cosmetic API", version="2.0")
 
-#  Middleware
-#app.add_middleware(SessionMiddleware, secret_key=SESSION_SECRET) insted of this we use this->
+# Middleware
 app.add_middleware(
     SessionMiddleware,
     secret_key=SESSION_SECRET,
-    same_site="lax",        # REQUIRED for cookies to work
-    https_only=False,  
-    path="/",    # REQUIRED on localhost
+    same_site="lax",
+    https_only=False,
+    path="/",
 )
 
 app.add_middleware(
@@ -33,26 +35,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#  MongoDB Setup 
+# Mongo Variables
 db = None
 users = None
+products = None   
 
 @app.on_event("startup")
 async def startup_event():
-    global db, users
-    print("🔍 Connecting to Local MongoDB...")
+    global db, users, products
+    print("🔍 Connecting to MongoDB Atlas...")
     try:
-        client = AsyncIOMotorClient(
-            MONGO_URI,
-            serverSelectionTimeoutMS=3000  # 5 sec timeout
-        )
-        await client.admin.command("ping")
-        db = client["ash_legacy"]   # your local DB name
-        users = db["users"]
-        print("✅ Connected to Local MongoDB!")
-    except Exception as e:
-        print("❌ MongoDB connection failed:", e)
+        client = AsyncIOMotorClient(MONGO_URI)
+        db = client["ash_legacy"]     # database name
 
+        users = db["users"]          
+        products = db["products"]     
+
+        print("✅ Connected to MongoDB Atlas!")
+    except Exception as e:
+        print("❌ MongoDB Atlas connection failed:", e)
 
 # Password Hashing 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -64,23 +65,22 @@ def verify_password(plain: str, hashed: str) -> bool:
     return pwd_context.verify(plain[:72], hashed)
 
 def require_login(request: Request) -> str:
-    """Check if user is logged in"""
     user_id = request.session.get("user_id")
     if not user_id:
         raise HTTPException(status_code=401, detail="Login required")
     return user_id
 
-#ROUTES 
+
+# Test DB
 @app.get("/test-db")
 async def test_db():
-    """Quick MongoDB connection test"""
     try:
         count = await users.count_documents({})
         return {"connected": True, "userCount": count}
     except Exception as e:
         return {"connected": False, "error": str(e)}
 
-#  Registration
+# User registration
 @app.post("/submit")
 async def register_user(
     name: str = Form(...),
@@ -103,12 +103,9 @@ async def register_user(
     
     except Exception as e:
         print("❌ Registration error:", e)
-        return JSONResponse(
-            {"success": False, "message": f"Server error: {str(e)}"},
-            status_code=500
-        )
+        return JSONResponse({"success": False, "message": f"Server error: {str(e)}"}, status_code=500)
 
-#  Login
+# login user
 @app.post("/signin")
 async def login_user(request: Request, email: str = Form(...), password: str = Form(...)):
     try:
@@ -124,15 +121,40 @@ async def login_user(request: Request, email: str = Form(...), password: str = F
     
     except Exception as e:
         print("❌ Login error:", e)
-        return JSONResponse(
-            {"success": False, "message": f"Server error: {str(e)}"},
-            status_code=500
-        )
+        return JSONResponse({"success": False, "message": f"Server error: {str(e)}"}, status_code=500)
 
-#  Current user
+#product APIs
+
+@app.post("/products/add")
+async def add_product(
+    productId: str = Form(...),
+    name: str = Form(...),
+    description: str = Form(...),
+    price: float = Form(...),
+    image: str = Form(...)
+):
+    product = {
+        "productId": productId,
+        "name": name,
+        "description": description,
+        "price": price,
+        "image": image
+    }
+    await products.insert_one(product)
+    return {"success": True, "message": "Product added!"}
+
+@app.get("/products")
+async def get_all_products():
+    all_products = []
+    async for p in products.find():
+        p["_id"] = str(p["_id"])
+        all_products.append(p)
+    return {"success": True, "products": all_products}
+
 @app.get("/user")
 async def get_user(request: Request):
     user_id = request.session.get("user_id")
+
     if not user_id:
         return {"loggedIn": False}
 
@@ -140,13 +162,13 @@ async def get_user(request: Request):
     if not user_doc:
         return {"loggedIn": False}
 
-    user_doc["_id"] = str(user_doc["_id"])  # convert ObjectId
+    user_doc["_id"] = str(user_doc["_id"])
     user_obj = User.model_validate(user_doc)
 
     return {"loggedIn": True, "user": user_obj}
 
 
-#  Wishlist - Add
+# Wishlist - Add
 @app.post("/wishlist/add")
 async def add_wishlist(
     request: Request,
@@ -158,29 +180,56 @@ async def add_wishlist(
     user_id = require_login(request)
     user = await users.find_one({"_id": ObjectId(user_id)})
 
+    # Already exists?
     if any(item["productId"] == productId for item in user.get("wishlist", [])):
         return {"success": False, "message": "Already in wishlist"}
 
-    new_item = {"productId": productId, "name": name, "image": image, "price": price}
+    # New wishlist item
+    new_item = {
+        "productId": productId,
+        "name": name,
+        "image": image,
+        "price": price
+    }
+
     user["wishlist"].append(new_item)
-    await users.update_one({"_id": ObjectId(user_id)}, {"$set": {"wishlist": user["wishlist"]}})
+    await users.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$set": {"wishlist": user["wishlist"]}}
+    )
+
     return {"success": True, "message": "Added to wishlist"}
 
-#  Wishlist - Remove
+# Wishlist - Remove
 @app.post("/wishlist/remove")
 async def remove_wishlist(request: Request, productId: str = Form(...)):
     user_id = require_login(request)
     user = await users.find_one({"_id": ObjectId(user_id)})
+
     updated = [item for item in user.get("wishlist", []) if item["productId"] != productId]
-    await users.update_one({"_id": ObjectId(user_id)}, {"$set": {"wishlist": updated}})
+
+    await users.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$set": {"wishlist": updated}}
+    )
+
     return {"success": True, "message": "Removed from wishlist"}
 
-#  Wishlist - Get All
+
+# Wishlist - Get All
 @app.get("/wishlist")
 async def get_wishlist(request: Request):
     user_id = require_login(request)
-    user = await users.find_one({"_id": ObjectId(user_id)}, {"wishlist": 1})
-    return {"success": True, "wishlist": user.get("wishlist", [])}
+    
+    user = await users.find_one(
+        {"_id": ObjectId(user_id)},
+        {"wishlist": 1}
+    )
+
+    return {
+        "success": True,
+        "wishlist": user.get("wishlist", [])
+    }
 
 #  Logout
 @app.post("/logout")
@@ -188,12 +237,13 @@ async def logout(request: Request):
     request.session.clear()
     return {"success": True, "message": "Logged out"}
 
-#  Serve Frontend
+@app.get("/.well-known/appspecific/com.chrome.devtools.json")
+async def ignore_chrome():
+    return {"status": "ok"}
+
+# Serve frontend
 @app.get("/")
 async def home():
     return FileResponse("public/index.html")
 
-#  Serve Static Files
 app.mount("/public", StaticFiles(directory="public"), name="public")
-#   message
-print("🚀 Ash Cosmetic API Ready on http://127.0.0.1:8000")
