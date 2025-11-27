@@ -13,3 +13,5 @@ typing-extensions
 fastapi-cli
 ujson
 annotated-types
+python-dotenv
+
