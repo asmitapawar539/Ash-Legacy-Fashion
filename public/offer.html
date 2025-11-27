@@ -200,35 +200,19 @@
 
 <script>
   // Wishlist
- document.querySelectorAll(".wishlist-btn").forEach(btn => {
-  btn.addEventListener("click", async () => {
+document.querySelectorAll(".wishlist-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
     const productId = btn.dataset.id;
     const name = btn.dataset.name;
     const image = btn.dataset.image;
     const price = btn.dataset.price;
 
-    const formData = new FormData();
-    formData.append("productId", productId);
-    formData.append("name", name);
-    formData.append("image", image);
-    formData.append("price", price);
-
-    try {
-      const res = await fetch("/wishlist/add", {
-        method: "POST",
-        credentials: "include",
-        body: formData,
-      });
-
-      const result = await res.json();
-      alert(result.success ? `✅ ${name} added!` : result.message);
-    } catch (err) {
-      alert("❌ Network error");
-    }
+    // Call reusable wishlist function
+    addToWishlist(productId, name, image, price);
   });
 });
 
-  //  Cart
+//  Cart
   document.querySelectorAll(".cart-btn").forEach(btn => {
     btn.addEventListener("click", async () => {
       const productId = btn.dataset.id;
@@ -302,16 +286,26 @@ async function addToWishlist(id, name, image, price) {
   formData.append("price", parseFloat(price));
 
   try {
-    const res = await fetch("/wishlist/add", {
-      method: "POST",
-      credentials: "include",
-      body: formData
-    });
-    const result = await res.json();
-    alert(result.success ? `✅ ${name} added to wishlist!` : result.message);
-  } catch (err) {
-    alert("❌ Network error");
-  }
+const res = await fetch("/wishlist/add", {
+method: "POST",
+credentials: "include",
+body: formData
+});
+
+// Check if user is NOT logged in
+if (res.status === 401) {
+alert("⚠️ Login required!");
+window.location.href = "/public/form.html"; // redirect to login page
+return;
+}
+
+const result = await res.json();
+alert(result.success ? `✅ ${name} added to wishlist!` : result.message);
+
+} catch (err) {
+alert("❌ Network error");
+}
+
 }
 
 /*Dynamic Product View  */
